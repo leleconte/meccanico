@@ -35,7 +35,6 @@
             z-index: -1;
         }
 
-        /* NAVIGATION RESPONSIVE */
         nav {
             position: fixed;
             top: 0; width: 100%;
@@ -50,7 +49,6 @@
         }
 
         .logo { font-weight: 900; font-size: 1.3rem; color: var(--primary); letter-spacing: 2px; }
-        
         .nav-links { display: flex; align-items: center; }
         .nav-links a {
             color: var(--text);
@@ -62,10 +60,8 @@
             transition: var(--transition);
         }
         .nav-links a:hover { color: var(--primary); }
-
         .menu-toggle { display: none; font-size: 1.5rem; color: var(--primary); cursor: pointer; }
 
-        /* SECTIONS */
         section { min-height: 100vh; padding: 100px 7% 50px; display: flex; flex-direction: column; justify-content: center; }
 
         #home {
@@ -77,41 +73,30 @@
         .hero-content h1 { font-size: clamp(2.5rem, 8vw, 5rem); margin: 0; line-height: 1; color: #fff; text-shadow: 4px 4px 0px var(--primary); }
         .hero-content p { font-size: 1.1rem; color: #aaa; max-width: 500px; margin: 20px 0; }
 
-        .services-grid {
+        .listino-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
-            margin-top: 40px;
+            margin-top: 30px;
         }
 
-        .card {
+        .category-box {
             background: var(--surface);
-            padding: 35px;
             border: 1px solid var(--gray);
+            padding: 25px;
             transition: var(--transition);
         }
 
-        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
-        .card i { font-size: 2.2rem; color: var(--primary); margin-bottom: 20px; }
+        .category-box:hover { border-color: var(--primary); }
+        .category-box h3 { color: var(--primary); text-transform: uppercase; border-bottom: 1px solid var(--gray); padding-bottom: 10px; margin-top: 0; }
+        .price-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #222; font-size: 0.9rem; }
+        .price-item span:last-child { color: #fff; font-weight: bold; }
 
-        .container-box {
-            border: 2px solid var(--gray);
-            padding: clamp(20px, 5vw, 40px);
-            background: repeating-linear-gradient(45deg, #1a1a1a, #1a1a1a 10px, #1d1d1d 10px, #1d1d1d 20px);
-            text-align: center;
-        }
+        .manodopera-table { width: 100%; border-collapse: collapse; margin-top: 20px; text-align: left; background: #111; }
+        .manodopera-table th, .manodopera-table td { padding: 15px; border: 1px solid var(--gray); }
+        .manodopera-table th { background: var(--primary); color: #fff; text-transform: uppercase; }
+        .manodopera-table tr:hover { background: #1a1a1a; }
 
-        .manodopera-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            color: var(--primary);
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        /* BOOKING WRAPPER */
         .booking-wrapper {
             background: var(--surface);
             display: grid;
@@ -129,7 +114,6 @@
             padding: 12px;
             color: #fff;
             width: 100%;
-            font-size: 1rem; /* Importante per evitare zoom su mobile */
         }
 
         button.btn-submit {
@@ -140,29 +124,17 @@
             font-weight: 900;
             text-transform: uppercase;
             cursor: pointer;
-            transition: var(--transition);
         }
 
-        button.btn-submit:hover { background: #fff; color: var(--primary); }
-
-        /* RESPONSIVE DESIGN */
         @media (max-width: 850px) {
-            nav { padding: 15px 20px; }
             .menu-toggle { display: block; }
             .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 60px; left: 0; width: 100%;
-                background: var(--bg);
-                padding: 20px;
-                border-bottom: 2px solid var(--primary);
+                display: none; flex-direction: column; position: absolute;
+                top: 60px; left: 0; width: 100%; background: var(--bg); padding: 20px;
             }
             .nav-links.active { display: flex; }
-            .nav-links a { margin: 10px 0; font-size: 1rem; }
-
-            .booking-wrapper { grid-template-columns: 1fr; box-shadow: 10px 10px 0px var(--primary); }
-            section { padding: 80px 5% 40px; }
+            .booking-wrapper { grid-template-columns: 1fr; }
+            .manodopera-table { font-size: 0.8rem; }
         }
 
         footer { padding: 40px 20px; text-align: center; background: #000; color: var(--gray); font-size: 0.8rem; }
@@ -175,7 +147,6 @@
         <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
         <div class="nav-links" id="navLinks">
             <a href="#home" onclick="toggleMenu()">Home</a>
-            <a href="#servizi" onclick="toggleMenu()">Officina</a>
             <a href="#listino" onclick="toggleMenu()">Listino</a>
             <a href="#manodopera" onclick="toggleMenu()">Manodopera</a>
             <a href="#prenota" onclick="toggleMenu()">Prenota</a>
@@ -185,66 +156,96 @@
     <section id="home">
         <div class="hero-content">
             <h1>RAW<br>POWER.</h1>
-            <p>Efficienza meccanica e design brutale. Il punto di riferimento per ogni modifica estrema.</p>
+            <p>Efficienza meccanica e design brutale. Prezzi trasparenti e modifiche estreme.</p>
             <a href="#prenota" style="display:inline-block; padding: 15px 35px; background: var(--primary); color: white; text-decoration:none; font-weight:bold; margin-top:20px;">ENTRA IN OFFICINA</a>
         </div>
     </section>
 
-    <section id="servizi">
-        <h2 style="font-size: clamp(2rem, 5vw, 3rem); text-transform: uppercase;">Cosa Facciamo</h2>
-        <div class="services-grid">
-            <div class="card">
-                <i class="fas fa-tools"></i>
-                <h3>Riparazioni</h3>
-                <p>Interventi rapidi e strutturali. Motori, carrozzeria e parti meccaniche.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-tachometer-alt"></i>
-                <h3>Performance</h3>
-                <p>Tuning estremo, mappature e potenziamento per prestazioni fuori scala.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-paint-brush"></i>
-                <h3>Custom</h3>
-                <p>Verniciature, kit estetici e modifiche su misura per pezzi unici.</p>
-            </div>
-        </div>
-    </section>
-
     <section id="listino">
-        <h2 style="font-size: clamp(2rem, 5vw, 3rem); text-transform: uppercase;">Listino Prezzi</h2>
-        <div class="container-box">
-            <i class="fas fa-wrench" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 20px;"></i>
-            <h3>RICAMBI E COMPONENTI</h3>
-            <p>[ Area in aggiornamento - Prezzi in arrivo oggi pomeriggio ]</p>
+        <h2 style="font-size: clamp(2rem, 5vw, 3rem); text-transform: uppercase;">Listino Modifiche</h2>
+        <div class="listino-grid">
+            <div class="category-box">
+                <h3><i class="fas fa-paint-roller"></i> Verniciatura</h3>
+                <div class="price-item"><span>Normale</span><span>$1.500</span></div>
+                <div class="price-item"><span>Opaca</span><span>$3.000</span></div>
+                <div class="price-item"><span>Metallizzata</span><span>$4.000</span></div>
+            </div>
+            <div class="category-box">
+                <h3><i class="fas fa-engine"></i> Motori & Turbo</h3>
+                <div class="price-item"><span>V6 (Power 1)</span><span>$6.000</span></div>
+                <div class="price-item"><span>V8 (Power 2)</span><span>$8.500</span></div>
+                <div class="price-item"><span>V10 (Power 3)</span><span>$10.000</span></div>
+                <div class="price-item"><span>V12 (Power 4)</span><span>$15.000</span></div>
+                <div class="price-item"><span>Kit Turbo</span><span>$5.000</span></div>
+                <div class="price-item"><span>Impianto GPL</span><span>$4.500</span></div>
+            </div>
+            <div class="category-box">
+                <h3><i class="fas fa-car"></i> Estetica & Luci</h3>
+                <div class="price-item"><span>Cerchi</span><span>$4.500</span></div>
+                <div class="price-item"><span>Luci Xeno/LED</span><span>$200-$500</span></div>
+                <div class="price-item"><span>Vetri (Tutti i tipi)</span><span>$200-$500</span></div>
+                <div class="price-item"><span>Paraurti Carbonio</span><span>$7k-$8k</span></div>
+            </div>
         </div>
     </section>
 
     <section id="manodopera">
         <h2 style="font-size: clamp(2rem, 5vw, 3rem); text-transform: uppercase;">Manodopera</h2>
-        <div class="container-box">
-            <div class="manodopera-header">
+        <div class="container-box" style="text-align: left;">
+            <div class="manodopera-header" style="display:flex; align-items:center; gap:15px; color:var(--primary); margin-bottom:20px;">
                 <i class="fas fa-stopwatch" style="font-size: 2.5rem;"></i>
-                <h3>TEMPI & COSTI DI MODIFICA</h3>
+                <h3 style="margin:0;">Tabella Tempi & Costi Installazione</h3>
             </div>
-            <p>Dettaglio del tempo richiesto per ogni intervento e costi orari.</p>
-            <div style="border: 1px dashed var(--gray); padding: 20px; margin-top: 20px; color: #888; font-size: 0.9rem;">
-                <p>Esempio: Montaggio Turbo - 45 min - $XXX</p>
-                <p>[ Dati in caricamento oggi pomeriggio ]</p>
-            </div>
+            <p>Il City Garage applica costi fissi di manodopera per garantire una lavorazione impeccabile.</p>
+            
+            <table class="manodopera-table">
+                <thead>
+                    <tr>
+                        <th>Intervento</th>
+                        <th>Tempo Stimato</th>
+                        <th>Costo Manodopera</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Montaggio Motore GPL</strong></td>
+                        <td>30 Minuti</td>
+                        <td style="color:var(--primary); font-weight:bold;">$500</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Applicazione Vetri Oscurati</strong> (Qualsiasi tipo)</td>
+                        <td>10 Minuti</td>
+                        <td>$50</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Modifiche Meccaniche</strong> (Turbo, V6-V12, Trasmissioni)</td>
+                        <td>5 Minuti</td>
+                        <td>$50 (a modifica)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Modifiche Estetiche</strong> (Vernice, Cerchi, Luci)</td>
+                        <td>5 Minuti</td>
+                        <td>$50 (a modifica)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bodykit</strong> (Scarichi e Paraurti)</td>
+                        <td>5 Minuti</td>
+                        <td>$50 (a modifica)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 15px;">* I 10 minuti per i vetri sono necessari per garantire la perfetta applicazione della pellicola senza bolle.</p>
         </div>
     </section>
 
     <section id="prenota">
         <div class="booking-wrapper">
             <div class="form-info">
-                <h2>PRENOTA SUPPORTO</h2>
-                <p>Scegli il tuo servizio. Garantiamo efficienza e velocità.</p>
-                <ul style="list-style: none; padding: 0; margin-top: 30px; font-size: 0.9rem;">
-                    <li><i class="fas fa-cog"></i> Riparazioni Meccaniche</li>
-                    <li><i class="fas fa-bolt"></i> Tuning & Performance</li>
-                    <li><i class="fas fa-brush"></i> Modifiche Estetiche</li>
-                </ul>
+                <h2>PRENOTA ORA</h2>
+                <p>Inserisci i dati del mezzo. Il sistema invierà la scheda direttamente in officina.</p>
+                <p style="font-size: 0.8rem; margin-top: 20px;">
+                    <i class="fas fa-id-card"></i> <strong>MECCANICO ID:</strong> 1458608661105606850
+                </p>
             </div>
             <form id="bookingForm">
                 <input type="text" id="nome" placeholder="Il tuo nome" required>
@@ -253,28 +254,26 @@
                     <input type="text" id="targa" placeholder="Targa" style="flex:1; min-width: 100px;">
                 </div>
                 <select id="tipo_intervento" required>
-                    <option value="" disabled selected>Tipo di Intervento</option>
-                    <option value="Riparazione">Riparazione Guasto</option>
-                    <option value="Modifica Estetica">Modifica Estetica</option>
-                    <option value="Performance">Tuning Performance</option>
+                    <option value="" disabled selected>Servizio Principale</option>
+                    <option value="Motore/GPL">GPL / Power Engine</option>
+                    <option value="Vetri">Oscuramento Vetri (10 min)</option>
+                    <option value="Estetica">Verniciatura / Bodykit</option>
+                    <option value="Meccanica">Turbo / Assetto</option>
                 </select>
-                <textarea id="descrizione" rows="4" placeholder="Dettagli richiesta..." required></textarea>
-                <button type="submit" class="btn-submit">Invia al Webhook</button>
+                <textarea id="descrizione" rows="4" placeholder="Elenca tutte le modifiche richieste..." required></textarea>
+                <button type="submit" class="btn-submit">Invia Ordine di Lavoro</button>
             </form>
         </div>
     </section>
 
     <footer>
-        <p>CITY GARAGE &copy; 2026 | Radio Nokia Active | No Luxury, Just Power.</p>
+        <p>CITY GARAGE &copy; 2026 | Radio Nokia Active | Efficienza e Design</p>
     </footer>
 
     <script>
-        // Funzione Menu Mobile
         function toggleMenu() {
             const nav = document.getElementById('navLinks');
-            if (window.innerWidth <= 850) {
-                nav.classList.toggle('active');
-            }
+            if (window.innerWidth <= 850) { nav.classList.toggle('active'); }
         }
 
         const webhookURL = "https://discord.com/api/webhooks/1461659111903989832/GMV2bkoUV0-2sWIyCbDMTr9A01oQdITWiojYtK0STvRTab0T7us4KKpvTROSiZu39hf8";
@@ -283,9 +282,9 @@
         document.getElementById('bookingForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const payload = {
-                content: `<@&${ID_MECCANICO}> **[CITY GARAGE - NUOVA RICHIESTA]**`,
+                content: `<@&${ID_MECCANICO}> **[CITY GARAGE - NUOVO LAVORO]**`,
                 embeds: [{
-                    title: "🛠️ SCHEDA INTERVENTO",
+                    title: "🛠️ SCHEDA TECNICA",
                     color: 13849600,
                     fields: [
                         { name: "👤 Cliente", value: document.getElementById('nome').value, inline: true },
