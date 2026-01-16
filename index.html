@@ -35,67 +35,72 @@
             z-index: -1;
         }
 
+        /* NAVIGATION RESPONSIVE */
         nav {
             position: fixed;
             top: 0; width: 100%;
-            background: rgba(15, 15, 15, 0.95);
+            background: rgba(15, 15, 15, 0.98);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 50px;
+            padding: 15px 5%;
             border-bottom: 2px solid var(--primary);
             z-index: 1000;
             backdrop-filter: blur(10px);
         }
 
-        .logo { font-weight: 900; font-size: 1.5rem; color: var(--primary); letter-spacing: 2px; }
+        .logo { font-weight: 900; font-size: 1.3rem; color: var(--primary); letter-spacing: 2px; }
+        
+        .nav-links { display: flex; align-items: center; }
         .nav-links a {
             color: var(--text);
             text-decoration: none;
             margin-left: 20px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             font-weight: bold;
             transition: var(--transition);
         }
         .nav-links a:hover { color: var(--primary); }
 
-        section { min-height: 100vh; padding: 100px 10% 50px; display: flex; flex-direction: column; justify-content: center; }
+        .menu-toggle { display: none; font-size: 1.5rem; color: var(--primary); cursor: pointer; }
+
+        /* SECTIONS */
+        section { min-height: 100vh; padding: 100px 7% 50px; display: flex; flex-direction: column; justify-content: center; }
 
         #home {
-            background: linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=2000');
+            background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=2000');
             background-size: cover;
             background-position: center;
         }
 
-        .hero-content h1 { font-size: 5rem; margin: 0; line-height: 1; color: #fff; text-shadow: 5px 5px 0px var(--primary); }
-        .hero-content p { font-size: 1.2rem; color: #aaa; max-width: 500px; margin: 20px 0; }
+        .hero-content h1 { font-size: clamp(2.5rem, 8vw, 5rem); margin: 0; line-height: 1; color: #fff; text-shadow: 4px 4px 0px var(--primary); }
+        .hero-content p { font-size: 1.1rem; color: #aaa; max-width: 500px; margin: 20px 0; }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
             margin-top: 40px;
         }
 
         .card {
             background: var(--surface);
-            padding: 40px;
+            padding: 35px;
             border: 1px solid var(--gray);
             transition: var(--transition);
         }
 
-        .card:hover { border-color: var(--primary); transform: translateY(-10px); }
-        .card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
+        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .card i { font-size: 2.2rem; color: var(--primary); margin-bottom: 20px; }
 
         .container-box {
             border: 2px solid var(--gray);
-            padding: 40px;
+            padding: clamp(20px, 5vw, 40px);
             background: repeating-linear-gradient(45deg, #1a1a1a, #1a1a1a 10px, #1d1d1d 10px, #1d1d1d 20px);
             text-align: center;
         }
 
-        /* STILE MANODOPERA */
         .manodopera-header {
             display: flex;
             align-items: center;
@@ -103,56 +108,77 @@
             gap: 15px;
             color: var(--primary);
             margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
-        /* BOOKING */
+        /* BOOKING WRAPPER */
         .booking-wrapper {
             background: var(--surface);
             display: grid;
             grid-template-columns: 1fr 1fr;
             border: 1px solid var(--gray);
-            box-shadow: 20px 20px 0px var(--primary);
+            box-shadow: 15px 15px 0px var(--primary);
         }
 
-        .form-info { padding: 50px; background: var(--primary); color: #fff; }
-        form { padding: 50px; display: grid; gap: 15px; }
+        .form-info { padding: 40px; background: var(--primary); color: #fff; }
+        form { padding: 30px; display: grid; gap: 15px; }
 
         input, select, textarea {
             background: #111;
             border: 1px solid var(--gray);
-            padding: 15px;
+            padding: 12px;
             color: #fff;
             width: 100%;
+            font-size: 1rem; /* Importante per evitare zoom su mobile */
         }
 
         button.btn-submit {
             background: var(--primary);
             color: #fff;
             border: none;
-            padding: 20px;
+            padding: 18px;
             font-weight: 900;
             text-transform: uppercase;
             cursor: pointer;
+            transition: var(--transition);
         }
 
-        footer { padding: 50px; text-align: center; background: #000; color: var(--gray); font-size: 0.8rem; }
+        button.btn-submit:hover { background: #fff; color: var(--primary); }
 
-        @media (max-width: 768px) {
-            .booking-wrapper { grid-template-columns: 1fr; }
-            .hero-content h1 { font-size: 3rem; }
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 850px) {
+            nav { padding: 15px 20px; }
+            .menu-toggle { display: block; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px; left: 0; width: 100%;
+                background: var(--bg);
+                padding: 20px;
+                border-bottom: 2px solid var(--primary);
+            }
+            .nav-links.active { display: flex; }
+            .nav-links a { margin: 10px 0; font-size: 1rem; }
+
+            .booking-wrapper { grid-template-columns: 1fr; box-shadow: 10px 10px 0px var(--primary); }
+            section { padding: 80px 5% 40px; }
         }
+
+        footer { padding: 40px 20px; text-align: center; background: #000; color: var(--gray); font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
     <nav>
         <div class="logo">CITY GARAGE</div>
-        <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#servizi">Officina</a>
-            <a href="#listino">Listino</a>
-            <a href="#manodopera">Manodopera</a>
-            <a href="#prenota">Prenota</a>
+        <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+        <div class="nav-links" id="navLinks">
+            <a href="#home" onclick="toggleMenu()">Home</a>
+            <a href="#servizi" onclick="toggleMenu()">Officina</a>
+            <a href="#listino" onclick="toggleMenu()">Listino</a>
+            <a href="#manodopera" onclick="toggleMenu()">Manodopera</a>
+            <a href="#prenota" onclick="toggleMenu()">Prenota</a>
         </div>
     </nav>
 
@@ -160,12 +186,12 @@
         <div class="hero-content">
             <h1>RAW<br>POWER.</h1>
             <p>Efficienza meccanica e design brutale. Il punto di riferimento per ogni modifica estrema.</p>
-            <a href="#prenota" style="display:inline-block; padding: 15px 40px; background: var(--primary); color: white; text-decoration:none; font-weight:bold; margin-top:20px;">ENTRA IN OFFICINA</a>
+            <a href="#prenota" style="display:inline-block; padding: 15px 35px; background: var(--primary); color: white; text-decoration:none; font-weight:bold; margin-top:20px;">ENTRA IN OFFICINA</a>
         </div>
     </section>
 
     <section id="servizi">
-        <h2 style="font-size: 3rem; text-transform: uppercase;">Cosa Facciamo</h2>
+        <h2 style="font-size: clamp(2rem, 5vw, 3rem); text-transform: uppercase;">Cosa Facciamo</h2>
         <div class="services-grid">
             <div class="card">
                 <i class="fas fa-tools"></i>
@@ -186,25 +212,25 @@
     </section>
 
     <section id="listino">
-        <h2 style="font-size: 3rem; text-transform: uppercase;">Listino Prezzi</h2>
+        <h2 style="font-size: clamp(2rem, 5vw, 3rem); text-transform: uppercase;">Listino Prezzi</h2>
         <div class="container-box">
-            <i class="fas fa-wrench" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+            <i class="fas fa-wrench" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 20px;"></i>
             <h3>RICAMBI E COMPONENTI</h3>
-            <p>[ Area in aggiornamento - I prezzi verranno inseriti oggi pomeriggio ]</p>
+            <p>[ Area in aggiornamento - Prezzi in arrivo oggi pomeriggio ]</p>
         </div>
     </section>
 
     <section id="manodopera">
-        <h2 style="font-size: 3rem; text-transform: uppercase;">Manodopera</h2>
+        <h2 style="font-size: clamp(2rem, 5vw, 3rem); text-transform: uppercase;">Manodopera</h2>
         <div class="container-box">
             <div class="manodopera-header">
-                <i class="fas fa-stopwatch" style="font-size: 3rem;"></i>
-                <h3>TEMPI DI LAVORAZIONE</h3>
+                <i class="fas fa-stopwatch" style="font-size: 2.5rem;"></i>
+                <h3>TEMPI & COSTI DI MODIFICA</h3>
             </div>
-            <p>In questa sezione troverai il dettaglio di quanto tempo richiede ogni modifica e il relativo costo orario della manodopera.</p>
-            <div style="border: 1px dashed var(--gray); padding: 20px; margin-top: 20px; color: #888;">
+            <p>Dettaglio del tempo richiesto per ogni intervento e costi orari.</p>
+            <div style="border: 1px dashed var(--gray); padding: 20px; margin-top: 20px; color: #888; font-size: 0.9rem;">
                 <p>Esempio: Montaggio Turbo - 45 min - $XXX</p>
-                <p>[ Dati tecnici in caricamento oggi pomeriggio ]</p>
+                <p>[ Dati in caricamento oggi pomeriggio ]</p>
             </div>
         </div>
     </section>
@@ -213,8 +239,8 @@
         <div class="booking-wrapper">
             <div class="form-info">
                 <h2>PRENOTA SUPPORTO</h2>
-                <p>Riparazione o Modifica? Scegli il tuo servizio. Il City Garage garantisce efficienza e velocità.</p>
-                <ul style="list-style: none; padding: 0; margin-top: 30px;">
+                <p>Scegli il tuo servizio. Garantiamo efficienza e velocità.</p>
+                <ul style="list-style: none; padding: 0; margin-top: 30px; font-size: 0.9rem;">
                     <li><i class="fas fa-cog"></i> Riparazioni Meccaniche</li>
                     <li><i class="fas fa-bolt"></i> Tuning & Performance</li>
                     <li><i class="fas fa-brush"></i> Modifiche Estetiche</li>
@@ -222,9 +248,9 @@
             </div>
             <form id="bookingForm">
                 <input type="text" id="nome" placeholder="Il tuo nome" required>
-                <div style="display: flex; gap: 10px;">
-                    <input type="text" id="veicolo" placeholder="Veicolo" required>
-                    <input type="text" id="targa" placeholder="Targa">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <input type="text" id="veicolo" placeholder="Veicolo" style="flex:1; min-width: 150px;" required>
+                    <input type="text" id="targa" placeholder="Targa" style="flex:1; min-width: 100px;">
                 </div>
                 <select id="tipo_intervento" required>
                     <option value="" disabled selected>Tipo di Intervento</option>
@@ -232,7 +258,7 @@
                     <option value="Modifica Estetica">Modifica Estetica</option>
                     <option value="Performance">Tuning Performance</option>
                 </select>
-                <textarea id="descrizione" rows="4" placeholder="Descrivi il supporto richiesto..." required></textarea>
+                <textarea id="descrizione" rows="4" placeholder="Dettagli richiesta..." required></textarea>
                 <button type="submit" class="btn-submit">Invia al Webhook</button>
             </form>
         </div>
@@ -243,6 +269,14 @@
     </footer>
 
     <script>
+        // Funzione Menu Mobile
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            if (window.innerWidth <= 850) {
+                nav.classList.toggle('active');
+            }
+        }
+
         const webhookURL = "https://discord.com/api/webhooks/1461659111903989832/GMV2bkoUV0-2sWIyCbDMTr9A01oQdITWiojYtK0STvRTab0T7us4KKpvTROSiZu39hf8";
         const ID_MECCANICO = "1458608661105606850";
 
