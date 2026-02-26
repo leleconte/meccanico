@@ -7,35 +7,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
         :root {
-            /* Palette virata su un rosso brutale e scuro */
-            --primary: #8b0000; 
-            --primary-dark: #5a0000;
+            --primary: #d35400;
+            --primary-dark: #a34000;
             --bg: #0a0a0a;
             --surface: #141414;
-            --text: #cfcfcf;
+            --text: #e0e0e0;
             --gray: #333;
-            --transition: all 0.2s steps(4); /* Transizione più secca/scattosa */
+            --transition: all 0.3s steps(4); /* Transizione più "scattosa" e rozza */
         }
 
         * { box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
-            font-family: 'Courier New', Courier, monospace; /* Font più industriale */
+            font-family: 'Impact', 'Arial Black', sans-serif;
             background-color: var(--bg);
             color: var(--text);
             margin: 0;
             overflow-x: hidden;
+            letter-spacing: 1px;
         }
 
-        /* Overlay con grana d'asfalto per l'estetica rozza */
         body::before {
             content: "";
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
             opacity: 0.4;
-            z-index: 1000;
-            pointer-events: none;
+            z-index: -1;
         }
 
         nav {
@@ -46,132 +44,109 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 5%;
-            border-bottom: 4px solid var(--primary); /* Bordo più spesso */
-            z-index: 1100;
+            border-bottom: 4px solid var(--primary);
+            z-index: 1000;
         }
 
-        .logo { 
-            font-family: 'Impact', sans-serif; 
-            font-weight: 900; 
-            font-size: 1.8rem; 
-            color: var(--primary); 
-            letter-spacing: -1px;
-            text-transform: uppercase;
-        }
-
+        .logo { font-weight: 900; font-size: 1.8rem; color: var(--primary); text-transform: uppercase; }
         .nav-links { display: flex; align-items: center; }
         .nav-links a {
-            color: #fff;
+            color: var(--text);
             text-decoration: none;
             margin-left: 20px;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            font-weight: 900;
             transition: var(--transition);
         }
         .nav-links a:hover { color: var(--primary); text-decoration: underline; }
         .menu-toggle { display: none; font-size: 1.5rem; color: var(--primary); cursor: pointer; }
 
-        section { min-height: 100vh; padding: 120px 7% 50px; display: flex; flex-direction: column; justify-content: center; }
+        section { min-height: 100vh; padding: 100px 7% 50px; display: flex; flex-direction: column; justify-content: center; }
 
         #home {
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1486006920555-c77dcf18193c?q=80&w=2000');
+            background: linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1486006920555-c77dcf18193c?q=80&w=2000');
             background-size: cover;
             background-position: center;
         }
 
-        .hero-content h1 { 
-            font-family: 'Impact', sans-serif;
-            font-size: clamp(3rem, 10vw, 6rem); 
-            margin: 0; 
-            line-height: 0.9; 
-            color: #fff; 
-            text-shadow: 6px 6px 0px var(--primary); 
-        }
-        .hero-content p { font-size: 1.2rem; color: #888; max-width: 550px; margin: 25px 0; border-left: 5px solid var(--primary); padding-left: 15px; }
+        .hero-content h1 { font-size: clamp(3rem, 10vw, 6rem); margin: 0; line-height: 0.9; color: #fff; text-shadow: 6px 6px 0px var(--primary); text-transform: uppercase; }
+        .hero-content p { font-size: 1.4rem; color: #bbb; max-width: 600px; margin: 25px 0; border-left: 5px solid var(--primary); padding-left: 15px; }
 
         .listino-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 15px;
             margin-top: 30px;
         }
 
         .category-box {
-            background: #000;
-            border: 2px solid var(--gray);
+            background: var(--surface);
+            border: 3px solid var(--gray);
             padding: 25px;
             transition: var(--transition);
         }
 
         .category-box:hover { border-color: var(--primary); transform: scale(1.02); }
-        .category-box h3 { 
-            color: #fff; 
-            background: var(--primary); 
-            display: inline-block; 
-            padding: 5px 15px; 
-            text-transform: uppercase; 
-            margin-top: 0;
-            font-family: 'Impact', sans-serif;
-        }
+        .category-box h3 { color: var(--primary); text-transform: uppercase; border-bottom: 3px solid var(--gray); padding-bottom: 10px; margin-top: 0; font-size: 1.5rem; }
+        .price-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #222; font-size: 1.1rem; }
+        .price-item span:last-child { color: #fff; }
 
-        .price-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #222; font-size: 1rem; }
-        .price-item span:last-child { color: var(--primary); font-weight: bold; }
-
-        .manodopera-table { width: 100%; border-collapse: collapse; margin-top: 20px; text-align: left; background: #000; border: 3px solid #222; }
-        .manodopera-table th, .manodopera-table td { padding: 15px; border: 1px solid #1a1a1a; }
-        .manodopera-table th { background: #111; color: var(--primary); text-transform: uppercase; border-bottom: 3px solid var(--primary); font-family: 'Impact'; }
-        .manodopera-table tr:hover { background: #050505; }
+        .manodopera-table { width: 100%; border-collapse: collapse; margin-top: 20px; text-align: left; background: #000; border: 3px solid var(--gray); }
+        .manodopera-table th, .manodopera-table td { padding: 15px; border: 1px solid var(--gray); }
+        .manodopera-table th { background: var(--primary); color: #000; text-transform: uppercase; font-size: 1.2rem; }
+        .manodopera-table tr:hover { background: #111; }
 
         .booking-wrapper {
-            background: #111;
+            background: var(--surface);
             display: grid;
             grid-template-columns: 1fr 1fr;
-            border: 5px solid #fff; /* Contrasto netto bianco su nero */
-            box-shadow: 20px 20px 0px var(--primary);
+            border: 4px solid var(--gray);
+            box-shadow: 20px 20px 0px #000;
         }
 
-        .form-info { padding: 40px; background: #000; color: #fff; border-right: 5px solid #fff; }
-        .form-info h2 { font-family: 'Impact', sans-serif; font-size: 3rem; margin: 0; color: var(--primary); }
-        
-        form { padding: 30px; display: grid; gap: 15px; background: #0a0a0a; }
+        .form-info { padding: 40px; background: #000; color: #fff; border-right: 4px solid var(--primary); }
+        .form-info h2 { font-size: 3rem; margin: 0; color: var(--primary); }
+        form { padding: 30px; display: grid; gap: 15px; background: #111; }
 
         input, select, textarea {
             background: #000;
-            border: 2px solid #333;
+            border: 2px solid var(--gray);
             padding: 15px;
             color: #fff;
             width: 100%;
+            font-family: 'Impact', sans-serif;
             text-transform: uppercase;
-            font-family: inherit;
         }
+
+        input:focus { border-color: var(--primary); outline: none; }
 
         button.btn-submit {
             background: var(--primary);
-            color: #fff;
+            color: #000;
             border: none;
             padding: 20px;
             font-weight: 900;
-            font-size: 1.2rem;
             text-transform: uppercase;
             cursor: pointer;
+            font-size: 1.5rem;
             font-family: 'Impact', sans-serif;
-            letter-spacing: 2px;
         }
-        button.btn-submit:hover { background: #ff0000; color: #000; }
+
+        button.btn-submit:hover { background: #fff; }
 
         @media (max-width: 850px) {
             .menu-toggle { display: block; }
             .nav-links {
                 display: none; flex-direction: column; position: absolute;
-                top: 60px; left: 0; width: 100%; background: #000; padding: 20px; border-bottom: 4px solid var(--primary);
+                top: 60px; left: 0; width: 100%; background: #000; padding: 20px;
+                border-bottom: 4px solid var(--primary);
             }
             .nav-links.active { display: flex; }
-            .booking-wrapper { grid-template-columns: 1fr; border-right: 5px solid #fff; }
-            .form-info { border-right: none; border-bottom: 5px solid #fff; }
+            .booking-wrapper { grid-template-columns: 1fr; }
+            .form-info { border-right: none; border-bottom: 4px solid var(--primary); }
         }
 
-        footer { padding: 60px 20px; text-align: center; background: #000; border-top: 10px solid var(--primary); color: #444; font-size: 0.9rem; text-transform: uppercase; }
+        footer { padding: 40px 20px; text-align: center; background: #000; color: #555; font-size: 1rem; border-top: 4px solid var(--gray); }
     </style>
 </head>
 <body>
@@ -180,63 +155,64 @@
         <div class="logo">GLASS HEROES</div>
         <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
         <div class="nav-links" id="navLinks">
-            <a href="#home" onclick="toggleMenu()">Officina</a>
+            <a href="#home" onclick="toggleMenu()">Garage</a>
             <a href="#listino" onclick="toggleMenu()">Listino</a>
-            <a href="#manodopera" onclick="toggleMenu()">Tempi</a>
+            <a href="#manodopera" onclick="toggleMenu()">Manodopera</a>
             <a href="#prenota" onclick="toggleMenu()">Prenota</a>
         </div>
     </nav>
 
     <section id="home">
         <div class="hero-content">
-            <h1>GLASS HEROES<br>AUTO REPAIRS.</h1>
-            <p>Niente chiacchiere, solo potenza. Ripariamo ferro, montiamo motori e distruggiamo la concorrenza con design brutali.</p>
-            <a href="#prenota" style="display:inline-block; padding: 20px 40px; background: #fff; color: #000; text-decoration:none; font-weight:900; font-family:Impact; margin-top:20px; border: 4px solid var(--primary);">SBATTI IL MEZZO IN OFFICINA</a>
+            <h1>GLASS HEROES<br><span style="color:var(--primary)">AUTO REPAIRS</span></h1>
+            <p>POTENZA PURA. DESIGN BRUTALE. NESSUNA SCUSA, SOLO PRESTAZIONI ESTREME.</p>
+            <a href="#prenota" style="display:inline-block; padding: 20px 40px; background: var(--primary); color: black; text-decoration:none; font-weight:bold; margin-top:20px; font-size: 1.2rem;">ENTRA IN OFFICINA</a>
         </div>
     </section>
 
     <section id="listino">
-        <h2 style="font-family: Impact; font-size: clamp(3rem, 8vw, 5rem); text-transform: uppercase; margin-bottom: 30px;">Prezzi del Ferro</h2>
+        <h2 style="font-size: 4rem; text-transform: uppercase; color: var(--primary); margin-bottom: 10px;">Listino Modifiche</h2>
         <div class="listino-grid">
             <div class="category-box">
                 <h3><i class="fas fa-paint-roller"></i> Verniciatura</h3>
                 <div class="price-item"><span>Normale</span><span>$1.500</span></div>
-                <div class="price-item"><span>Opaca Grezza</span><span>$3.000</span></div>
+                <div class="price-item"><span>Opaca</span><span>$3.000</span></div>
                 <div class="price-item"><span>Metallizzata</span><span>$4.000</span></div>
             </div>
             <div class="category-box">
                 <h3><i class="fas fa-engine"></i> Motori & Turbo</h3>
                 <div class="price-item"><span>V6 (Power 1)</span><span>$6.000</span></div>
-                <div class="price-item"><span>V8 (Cattivo)</span><span>$8.500</span></div>
-                <div class="price-item"><span>V12 (Folle)</span><span>$15.000</span></div>
-                <div class="price-item"><span>Kit Turbo Sangue</span><span>$5.000</span></div>
+                <div class="price-item"><span>V8 (Power 2)</span><span>$8.500</span></div>
+                <div class="price-item"><span>V10 (Power 3)</span><span>$10.000</span></div>
+                <div class="price-item"><span>V12 (Power 4)</span><span>$15.000</span></div>
+                <div class="price-item"><span>Kit Turbo</span><span>$5.000</span></div>
                 <div class="price-item"><span>Impianto GPL</span><span>$4.500</span></div>
             </div>
             <div class="category-box">
                 <h3><i class="fas fa-car"></i> Estetica & Luci</h3>
-                <div class="price-item"><span>Cerchi Lega</span><span>$4.500</span></div>
+                <div class="price-item"><span>Cerchi</span><span>$4.500</span></div>
                 <div class="price-item"><span>Luci Xeno/LED</span><span>$200-$500</span></div>
-                <div class="price-item"><span>Vetri (Tutti)</span><span>$200-$500</span></div>
-                <div class="price-item"><span>Bodykit Acciaio</span><span>$7k-$8k</span></div>
+                <div class="price-item"><span>Vetri (Tutti i tipi)</span><span>$200-$500</span></div>
+                <div class="price-item"><span>Paraurti Carbonio</span><span>$7k-$8k</span></div>
             </div>
         </div>
     </section>
 
     <section id="manodopera">
-        <h2 style="font-family: Impact; font-size: clamp(3rem, 8vw, 5rem); text-transform: uppercase;">Tempi & Sudore</h2>
+        <h2 style="font-size: 4rem; text-transform: uppercase;">Manodopera</h2>
         <div class="container-box" style="text-align: left;">
             <div class="manodopera-header" style="display:flex; align-items:center; gap:15px; color:var(--primary); margin-bottom:20px;">
-                <i class="fas fa-stopwatch" style="font-size: 3rem;"></i>
-                <h3 style="margin:0; font-family: Impact;">TABELLA DI MARCIA</h3>
+                <i class="fas fa-tools" style="font-size: 3rem;"></i>
+                <h3 style="margin:0; font-size: 2rem;">TABELLA TEMPI & COSTI</h3>
             </div>
-            <p>Glass Heroes non perde tempo. Ecco quanto ci mettiamo a sporcarci le mani.</p>
+            <p style="font-size: 1.2rem;">Glass Heroes non perde tempo. Costi fissi, lavoro duro.</p>
             
             <table class="manodopera-table">
                 <thead>
                     <tr>
                         <th>Intervento</th>
                         <th>Tempo Stimato</th>
-                        <th>Costo Fisso</th>
+                        <th>Costo Manodopera</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -251,51 +227,51 @@
                         <td>$50</td>
                     </tr>
                     <tr>
-                        <td><strong>Modifiche Meccaniche Pesanti</strong></td>
+                        <td><strong>Modifiche Meccaniche / Estetiche</strong></td>
                         <td>5 Minuti</td>
-                        <td>$50</td>
+                        <td>$50 (cad.)</td>
                     </tr>
                     <tr>
-                        <td><strong>Estetica & Carrozzeria</strong></td>
+                        <td><strong>Bodykit Estremi</strong></td>
                         <td>5 Minuti</td>
-                        <td>$50</td>
+                        <td>$50 (cad.)</td>
                     </tr>
                 </tbody>
             </table>
-            <p style="font-size: 0.8rem; color: #555; margin-top: 15px; font-style: italic;">* 10 minuti per i vetri. Se hai fretta, falli da solo e guardali fare le bolle.</p>
+            <p style="font-size: 0.9rem; color: #666; margin-top: 15px;">* I 10 minuti per i vetri servono a evitare imperfezioni. Non accettiamo lavori approssimativi.</p>
         </div>
     </section>
 
     <section id="prenota">
         <div class="booking-wrapper">
             <div class="form-info">
-                <h2>ORDINA IL LAVORO</h2>
-                <p>Inserisci i dati del tuo catorcio. Ti aspettiamo ai box.</p>
-                <p style="font-size: 0.9rem; margin-top: 30px; border: 2px solid var(--primary); padding: 15px; display: inline-block;">
-                    <i class="fas fa-id-card"></i> <strong>MECCANICO ID:</strong> 1458608661105606850
+                <h2>PRENOTA<br>IL LAVORO</h2>
+                <p>Inserisci i dati del mezzo. La scheda tecnica verrà stampata direttamente in officina.</p>
+                <p style="font-size: 1rem; margin-top: 30px; border-top: 2px solid var(--gray); padding-top: 20px;">
+                    <i class="fas fa-id-card"></i> <strong>OFFICINA ID:</strong> 1458608661105606850
                 </p>
             </div>
             <form id="bookingForm">
-                <input type="text" id="nome" placeholder="IL TUO NOME" required>
+                <input type="text" id="nome" placeholder="NOME CLIENTE" required>
                 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <input type="text" id="veicolo" placeholder="VEICOLO" style="flex:1; min-width: 150px;" required>
+                    <input type="text" id="veicolo" placeholder="MODELLO MEZZO" style="flex:1; min-width: 150px;" required>
                     <input type="text" id="targa" placeholder="TARGA" style="flex:1; min-width: 100px;">
                 </div>
                 <select id="tipo_intervento" required>
-                    <option value="" disabled selected>COSA SERVE?</option>
+                    <option value="" disabled selected>TIPO DI SERVIZIO</option>
                     <option value="Motore/GPL">GPL / POWER ENGINE</option>
-                    <option value="Vetri">VETRI (10 MIN)</option>
-                    <option value="Estetica">VERNICE / BODYKIT</option>
+                    <option value="Vetri">VETRI OSCURATI (10 MIN)</option>
+                    <option value="Estetica">VERNICIATURA / BODYKIT</option>
                     <option value="Meccanica">TURBO / ASSETTO</option>
                 </select>
-                <textarea id="descrizione" rows="4" placeholder="ELENCA LE MODIFICHE SENZA GIRI DI PAROLE..." required></textarea>
+                <textarea id="descrizione" rows="4" placeholder="ELENCA TUTTE LE MODIFICHE RICHIESTE..." required></textarea>
                 <button type="submit" class="btn-submit">INVIA ORDINE DI LAVORO</button>
             </form>
         </div>
     </section>
 
     <footer>
-        <p>GLASS HEROES &copy; 2026 | Radio Nokia Active | Efficienza e Design Brutale</p>
+        <p>GLASS HEROES &copy; 2026 | AUTO REPAIRS | NO COMPROMISE</p>
     </footer>
 
     <script>
@@ -310,16 +286,16 @@
         document.getElementById('bookingForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const payload = {
-                content: `<@&${ID_MECCANICO}> **[GLASS HEROES - NUOVO ORDINE]**`,
+                content: `<@&${ID_MECCANICO}> **[GLASS HEROES - NUOVO LAVORO]**`,
                 embeds: [{
                     title: "💀 SCHEDA TECNICA OFFICINA",
-                    color: 9109504,
+                    color: 13849600,
                     fields: [
                         { name: "👤 Cliente", value: document.getElementById('nome').value, inline: true },
-                        { name: "🚘 Mezzo", value: document.getElementById('veicolo').value, inline: true },
+                        { name: "🚘 Veicolo", value: document.getElementById('veicolo').value, inline: true },
                         { name: "🔢 Targa", value: document.getElementById('targa').value || "N/A", inline: true },
-                        { name: "🔧 Intervento", value: document.getElementById('tipo_intervento').value, inline: false },
-                        { name: "📋 Nota Lavoro", value: "```" + document.getElementById('descrizione').value + "```" }
+                        { name: "🔧 Servizio", value: document.getElementById('tipo_intervento').value, inline: false },
+                        { name: "📋 Nota", value: "```" + document.getElementById('descrizione').value + "```" }
                     ],
                     timestamp: new Date()
                 }]
@@ -330,7 +306,7 @@
                 alert('ORDINE INVIATO. PORTA IL MEZZO.');
                 document.getElementById('bookingForm').reset();
             })
-            .catch(() => alert('ERRORE DI TRASMISSIONE.'));
+            .catch(() => alert('ERRORE DI SISTEMA. RIPROVA.'));
         });
     </script>
 </body>
