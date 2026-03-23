@@ -238,7 +238,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>Montaggio Motore GPL / Meccanica Complessa</strong></td>
+                    <td><strong>Meccanica Complessa (Motore/Assetto)</strong></td>
                     <td>30 Minuti</td>
                     <td style="color:var(--primary); font-weight:bold;">$500</td>
                 </tr>
@@ -262,72 +262,90 @@
         <p style="font-size: 0.9rem; color: #666; margin-top: 15px;">* La precisione richiede tempo. Non accettiamo lavori approssimativi per garantire la massima efficienza e design.</p>
     </div>
 </section>
-    <section id="prenota">
-        <div class="booking-wrapper">
-            <div class="form-info">
-                <h2>PRENOTA<br>IL LAVORO</h2>
-                <p>Inserisci i dati del mezzo. La scheda tecnica verrà stampata direttamente in officina.</p>
-                <p style="font-size: 1rem; margin-top: 30px; border-top: 2px solid var(--gray); padding-top: 20px;">
-                    <i class="fas fa-id-card"></i> <strong>OFFICINA ID:</strong> 1484923598291341424
-                </p>
-            </div>
-            <form id="bookingForm">
-                <input type="text" id="nome" placeholder="NOME CLIENTE" required>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <input type="text" id="veicolo" placeholder="MODELLO MEZZO" style="flex:1; min-width: 150px;" required>
-                    <input type="text" id="targa" placeholder="TARGA" style="flex:1; min-width: 100px;">
-                </div>
-                <select id="tipo_intervento" required>
-                    <option value="" disabled selected>TIPO DI SERVIZIO</option>
-                    <option value="Motore/GPL">GPL / POWER ENGINE</option>
-                    <option value="Vetri">VETRI OSCURATI (10 MIN)</option>
-                    <option value="Estetica">VERNICIATURA / BODYKIT</option>
-                    <option value="Meccanica">TURBO / ASSETTO</option>
-                </select>
-                <textarea id="descrizione" rows="4" placeholder="ELENCA TUTTE LE MODIFICHE RICHIESTE..." required></textarea>
-                <button type="submit" class="btn-submit">INVIA ORDINE DI LAVORO</button>
-            </form>
+
+<section id="prenota">
+    <div class="booking-wrapper">
+        <div class="form-info">
+            <h2>PRENOTA<br>IL LAVORO</h2>
+            <p>Inserisci i dati del mezzo e scegli l'appuntamento. La scheda tecnica verrà stampata direttamente in officina.</p>
+            <p style="font-size: 1rem; margin-top: 30px; border-top: 2px solid var(--gray); padding-top: 20px;">
+                <i class="fas fa-id-card"></i> <strong>OFFICINA ID:</strong> 1484923598291341424
+            </p>
         </div>
-    </section>
+        <form id="bookingForm">
+            <input type="text" id="nome" placeholder="NOME CLIENTE" required>
+            
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <input type="text" id="veicolo" placeholder="MODELLO MEZZO" style="flex:1; min-width: 150px;" required>
+                <input type="text" id="targa" placeholder="TARGA" style="flex:1; min-width: 100px;">
+            </div>
 
-    <footer>
-        <p>GLASS HEROES &copy; 2026 | AUTO REPAIRS | NO COMPROMISE</p>
-    </footer>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <input type="date" id="data_appuntamento" style="flex:1;" required>
+                <input type="time" id="ora_appuntamento" style="flex:1;" required>
+            </div>
 
-    <script>
-        function toggleMenu() {
-            const nav = document.getElementById('navLinks');
-            if (window.innerWidth <= 850) { nav.classList.toggle('active'); }
-        }
+            <select id="tipo_intervento" required>
+                <option value="" disabled selected>TIPO DI SERVIZIO</option>
+                <option value="Meccanica">POWER ENGINE / PRESTAZIONI</option>
+                <option value="Vetri">VETRI OSCURATI (10 MIN)</option>
+                <option value="Estetica">VERNICIATURA / BODYKIT</option>
+                <option value="Assetto">TURBO / ASSETTO / FRENI</option>
+            </select>
+            
+            <textarea id="descrizione" rows="4" placeholder="ELENCA TUTTE LE MODIFICHE RICHIESTE..." required></textarea>
+            <button type="submit" class="btn-submit">INVIA ORDINE DI LAVORO</button>
+        </form>
+    </div>
+</section>
 
-        const webhookURL = "https://discord.com/api/webhooks/1476725281208406228/nuXon7SIU6PevEL76CVem7Sn1lFFWA1MyLhg8ky3VWiZDGk4rksYqaBUmdX7ZzsIUQyd";
-        const ID_MECCANICO = "1458608661105606850";
+<footer>
+    <p>GLASS HEROES &copy; 2026 | AUTO REPAIRS | NO COMPROMISE</p>
+</footer>
 
-        document.getElementById('bookingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const payload = {
-                content: `<@&${ID_MECCANICO}> **[GLASS HEROES - NUOVO LAVORO]**`,
-                embeds: [{
-                    title: "💀 SCHEDA TECNICA OFFICINA",
-                    color: 13849600,
-                    fields: [
-                        { name: "👤 Cliente", value: document.getElementById('nome').value, inline: true },
-                        { name: "🚘 Veicolo", value: document.getElementById('veicolo').value, inline: true },
-                        { name: "🔢 Targa", value: document.getElementById('targa').value || "N/A", inline: true },
-                        { name: "🔧 Servizio", value: document.getElementById('tipo_intervento').value, inline: false },
-                        { name: "📋 Nota", value: "```" + document.getElementById('descrizione').value + "```" }
-                    ],
-                    timestamp: new Date()
-                }]
-            };
+<script>
+    function toggleMenu() {
+        const nav = document.getElementById('navLinks');
+        if (window.innerWidth <= 850) { nav.classList.toggle('active'); }
+    }
 
-            fetch(webhookURL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
-            .then(() => {
-                alert('ORDINE INVIATO. PORTA IL MEZZO.');
-                document.getElementById('bookingForm').reset();
-            })
-            .catch(() => alert('ERRORE DI SISTEMA. RIPROVA.'));
-        });
-    </script>
+    const webhookURL = "https://discord.com/api/webhooks/1485703336798715936/QaRyROIwSFEfMiNJLO7xas6Zz2LyUFkqJAvmboCRO1pFUXVrn43rAV_CiJ4G-pFzwJVd";
+    const ID_MECCANICO = "Glass Heroes";
+
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const data = document.getElementById('data_appuntamento').value;
+        const ora = document.getElementById('ora_appuntamento').value;
+
+        const payload = {
+            content: `<@&${ID_MECCANICO}> **[GLASS HEROES - NUOVO APPUNTAMENTO]**`,
+            embeds: [{
+                title: "💀 SCHEDA TECNICA OFFICINA",
+                color: 13849600,
+                fields: [
+                    { name: "👤 Cliente", value: document.getElementById('nome').value, inline: true },
+                    { name: "🚘 Veicolo", value: document.getElementById('veicolo').value, inline: true },
+                    { name: "🔢 Targa", value: document.getElementById('targa').value || "N/A", inline: true },
+                    { name: "📅 Appuntamento", value: `Il ${data} alle ore ${ora}`, inline: false },
+                    { name: "🔧 Servizio", value: document.getElementById('tipo_intervento').value, inline: true },
+                    { name: "📋 Nota", value: "```" + document.getElementById('descrizione').value + "```" }
+                ],
+                timestamp: new Date()
+            }]
+        };
+
+        fetch(webhookURL, { 
+            method: 'POST', 
+            headers: { 'Content-Type': 'application/json' }, 
+            body: JSON.stringify(payload) 
+        })
+        .then(() => {
+            alert('ORDINE INVIATO. CI VEDIAMO IN OFFICINA!');
+            document.getElementById('bookingForm').reset();
+        })
+        .catch(() => alert('ERRORE DI SISTEMA. RIPROVA.'));
+    });
+</script>
 </body>
 </html>
